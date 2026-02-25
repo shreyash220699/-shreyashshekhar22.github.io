@@ -777,6 +777,7 @@
     .modal-media { max-height: 260px; }
     .modal-media video { max-height: 260px; }
     .modal-media img { max-height: 260px; }
+    .modal-media iframe { min-height: 200px; height: 56vw; max-height: 260px; }
     .modal-body { padding: 24px 20px 28px; }
     .modal-title { font-size: 22px; }
     .modal-stats { gap: 20px; flex-wrap: wrap; }
@@ -1206,9 +1207,8 @@ const MODALS = {
       { num: "11", label: "Stories Told" },
       { num: "1", label: "Documentary Film" }
     ],
-    // ↓ TYPE: "video" — put your .mp4 file in the same folder as this HTML file
-    mediaType: "video",
-    mediaSrc: "",  // e.g. "pvr-nest-documentary.mp4"
+    mediaType: "youtube",
+    mediaSrc: "vDl654jhJLQ",
     mediaAlt: "PVR Nest CSR Documentary"
   },
 
@@ -1336,7 +1336,30 @@ const MODALS = {
     // Media
     const mediaEl = document.getElementById('modal-media');
     if (data.mediaSrc) {
-      if (data.mediaType === 'video') {
+      if (data.mediaType === 'youtube') {
+        mediaEl.innerHTML = `<a href="https://youtu.be/${data.mediaSrc}" target="_blank" rel="noopener" style="
+          display:block; position:relative; width:100%; aspect-ratio:16/9;
+          background:#000; border-radius:6px; overflow:hidden; cursor:pointer; text-decoration:none;">
+          <img src="https://img.youtube.com/vi/${data.mediaSrc}/maxresdefault.jpg"
+            style="width:100%; height:100%; object-fit:cover; opacity:0.85; display:block;">
+          <div style="
+            position:absolute; inset:0; display:flex; flex-direction:column;
+            align-items:center; justify-content:center; gap:12px;">
+            <div style="
+              width:68px; height:48px; background:#FF0000; border-radius:10px;
+              display:flex; align-items:center; justify-content:center;
+              box-shadow:0 4px 20px rgba(0,0,0,0.5);">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+            <span style="color:white; font-family:'DM Sans',sans-serif; font-size:12px;
+              letter-spacing:0.1em; text-transform:uppercase; opacity:0.9;">
+              Watch on YouTube ↗
+            </span>
+          </div>
+        </a>`;
+      } else if (data.mediaType === 'video') {
         mediaEl.innerHTML = `<video controls autoplay muted playsinline>
           <source src="${data.mediaSrc}" type="video/mp4">
           Your browser does not support video playback.
@@ -1395,9 +1418,11 @@ const MODALS = {
       // Restore custom cursor
       cursor.style.opacity = '1';
       follower.style.opacity = '0.5';
-      // Pause any video
+      // Pause any video or stop YouTube iframe
       const vid = overlay.querySelector('video');
       if (vid) vid.pause();
+      const iframe = overlay.querySelector('iframe');
+      if (iframe) iframe.src = iframe.src;
     }, 300);
   }
 
