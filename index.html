@@ -243,10 +243,23 @@
     color: var(--warm-grey);
     margin-top: 4px;
   }
-
-  .hero-photo-wrap {
+.hero-photo-wrap {
     position: absolute;
-    bottom: 0;
+    inset: 0;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+  .hero-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+  }
+ /* <!--.hero-photo-wrap {
+    position: absolute;
+    /bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 72%;
@@ -263,7 +276,7 @@
     /* Fade out the bottom of the photo into the background */
     /*-webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);*/
     /*mask-image: linear-gradient(to bottom, black 60%, transparent 100%);*/
-  }
+  }-->*/
   /* Placeholder shown before photo is added */
   .hero-photo-placeholder {
     width: 100%;
