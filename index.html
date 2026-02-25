@@ -1193,9 +1193,9 @@ const MODALS = {
     stats: [
       { num: "1", label: "Catalogue Designed" }
     ],
-    mediaType: "download",
-    mediaSrc: "Product Catalogue.pdf",  // e.g. "pvr-nest-portfolio.jpg"
-    mediaAlt: "PVR Nest Product Portfolio"
+     mediaType: "download",
+    mediaSrc: "Products Catalogue.pdf",
+    mediaAlt: "Download Products Catalogue"
   },
 
   "csr-documentary": {
@@ -1335,12 +1335,25 @@ const MODALS = {
 
     // Media
     const mediaEl = document.getElementById('modal-media');
-    if (data.mediaSrc) {
+   if (data.mediaSrc) {
       if (data.mediaType === 'video') {
         mediaEl.innerHTML = `<video controls autoplay muted playsinline>
           <source src="${data.mediaSrc}" type="video/mp4">
           Your browser does not support video playback.
         </video>`;
+      } else if (data.mediaType === 'download') {
+        mediaEl.innerHTML = `<a href="${data.mediaSrc}" download style="
+          display:flex; flex-direction:column; align-items:center; justify-content:center;
+          width:100%; height:100%; min-height:200px;
+          background:rgba(192,74,42,0.06); border:2px dashed rgba(192,74,42,0.3);
+          border-radius:8px; text-decoration:none; gap:16px; padding:40px;
+          transition: background 0.2s, border-color 0.2s;
+        " onmouseover="this.style.background='rgba(192,74,42,0.12)';this.style.borderColor='rgba(192,74,42,0.6)'"
+           onmouseout="this.style.background='rgba(192,74,42,0.06)';this.style.borderColor='rgba(192,74,42,0.3)'">
+          <span style="font-size:48px;">📄</span>
+          <span style="font-family:'DM Sans',sans-serif; font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:var(--rust); font-weight:700;">↓ Download Catalogue</span>
+          <span style="font-family:'DM Sans',sans-serif; font-size:11px; color:#999; letter-spacing:0.05em;">Click to download PDF</span>
+        </a>`;
       } else {
         mediaEl.innerHTML = `<img src="${data.mediaSrc}" alt="${data.mediaAlt || ''}">`;
       }
