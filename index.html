@@ -828,7 +828,7 @@
       Marketing strategist and creative thinker with hands-on experience across operations, CSR, and brand storytelling. Currently pursuing MBA at NMIMS Hyderabad, specializing in Marketing with a minor in Analytics.
     </p>
     <div class="hero-cta">
-      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="Shreyash_Resume.pdf" download class="btn-primary">Download Resume</a>
       <a href="#contact" class="btn-outline">Get In Touch</a>
     </div>
     <div class="hero-stats">
@@ -1029,17 +1029,17 @@
       <h3 class="ach-title">Product Portfolio</h3>
       <p class="ach-desc">Developed a product catalogue featuring handcrafted items made by women beneficiaries at PVR Nest, paired with social media creatives to drive outreach.</p>
     </div>
-    <div class="ach-card reveal" data-modal="social-media">
+    <div class="ach-card reveal">
       <span class="ach-icon">📈</span>
       <h3 class="ach-title">Social Media Growth</h3>
       <p class="ach-desc">Created high-performing content for Oprencia Club consistently achieving 4K–6K+ views per post as Social & Content SPOC.</p>
     </div>
-    <div class="ach-card reveal" data-modal="consumer-research">
+    <div class="ach-card reveal">
       <span class="ach-icon">🔬</span>
       <h3 class="ach-title">Consumer Research</h3>
       <p class="ach-desc">Led a consumer behavior research project for HDFC KlarifyLife, conducting 20 structured interviews and delivering actionable findings.</p>
     </div>
-    <div class="ach-card reveal" data-modal="tata-power">
+    <div class="ach-card reveal">
       <span class="ach-icon">💼</span>
       <h3 class="ach-title">Tata Power Strategy</h3>
       <p class="ach-desc">Developed a complete business roadmap for Tata Power DDL's learning platform, from studio setup to LMS integration strategy.</p>
@@ -1182,7 +1182,7 @@ const MODALS = {
     // ↓ TYPE: "image" or "video"
     mediaType: "image",
     // ↓ FILE: put your screenshot/image in the same folder as this HTML file and change the filename
-    mediaSrc: "Meta Ads Metrics.png",  // e.g. "meta-ads-results.jpg"
+    mediaSrc: "",  // e.g. "meta-ads-results.jpg"
     mediaAlt: "Meta Ads Campaign Results Screenshot"
   },
 
@@ -1193,7 +1193,7 @@ const MODALS = {
     stats: [
       { num: "1", label: "Catalogue Designed" }
     ],
-     mediaType: "download",
+    mediaType: "download",
     mediaSrc: "Products Catalogue.pdf",
     mediaAlt: "Download Products Catalogue"
   },
@@ -1335,7 +1335,7 @@ const MODALS = {
 
     // Media
     const mediaEl = document.getElementById('modal-media');
-   if (data.mediaSrc) {
+    if (data.mediaSrc) {
       if (data.mediaType === 'video') {
         mediaEl.innerHTML = `<video controls autoplay muted playsinline>
           <source src="${data.mediaSrc}" type="video/mp4">
