@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyash Shekhar — Marketing & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f0e8;
+    --rust: #c04a2a;
+    --dark: #1a1410;
+    --mid: #4a3f35;
+    --warm-grey: #9c9089;
+    --accent: #e8a058;
+    --light-rust: #f0e2d8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
+  }
+
+  /* CUSTOM CURSOR — desktop only */
+  .cursor {
+    display: none;
+    width: 12px; height: 12px;
+    background: var(--rust);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    mix-blend-mode: multiply;
+  }
+  .cursor-follower {
+    display: none;
+    width: 36px; height: 36px;
+    border: 1px solid var(--rust);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, opacity 0.3s ease;
+    opacity: 0.5;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .cursor { display: block; }
+    .cursor-follower { display: block; }
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 60px;
+    mix-blend-mode: multiply;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 160px 60px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--dark);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-desc {
+    margin-top: 32px;
+    max-width: 380px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--mid);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--rust);
+    color: var(--cream);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--dark); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--mid);
+    color: var(--mid);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--rust); color: var(--rust); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-graphic {
+    position: absolute;
+    inset: 0;
+    background: var(--light-rust);
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.3s forwards;
+  }
+
+  .hero-circles {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle-ring {
+    position: absolute;
+    border: 1px solid rgba(192,74,42,0.15);
+    border-radius: 50%;
+    animation: spin 20s linear infinite;
+  }
+  .circle-ring:nth-child(1) { width: 300px; height: 300px; }
+  .circle-ring:nth-child(2) { width: 460px; height: 460px; animation-direction: reverse; animation-duration: 30s; }
+  .circle-ring:nth-child(3) { width: 620px; height: 620px; animation-duration: 45s; }
+
+  .hero-monogram {
+    font-family: 'Playfair Display', serif;
+    font-size: 220px;
+    font-weight: 900;
+    color: rgba(192,74,42,0.08);
+    position: absolute;
+    line-height: 1;
+    user-select: none;
+    animation: fadeIn 1.5s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(74,63,53,0.18);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    margin-top: 4px;
+  }
+
+  .hero-photo-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72%;
+    max-width: 380px;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+  .hero-photo-wrap img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    /* Fade out the bottom of the photo into the background */
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+  /* Placeholder shown before photo is added */
+  .hero-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 2px dashed rgba(192,74,42,0.25);
+    color: rgba(192,74,42,0.4);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+  .hero-photo-placeholder span { font-size: 36px; opacity: 0.5; }
+  .ticker {
+    background: var(--dark);
+    overflow: hidden;
+    padding: 14px 0;
+    position: relative;
+  }
+  .ticker-inner {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-text {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-right: 80px;
+  }
+  .ticker-dot { color: var(--rust); margin-right: 80px; }
+
+  /* SECTIONS COMMON */
+  section { position: relative; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--dark);
+  }
+  .section-title em { font-style: italic; color: var(--rust); }
+
+  /* ABOUT */
+  .about {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--mid);
+    margin-top: 28px;
+  }
+  .about-text p + p { margin-top: 16px; }
+
+  .about-right { }
+  .value-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(74,63,53,0.15);
+  }
+  .value-row:first-child { border-top: 1px solid rgba(74,63,53,0.15); }
+  .value-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--rust);
+    padding-top: 3px;
+    min-width: 28px;
+  }
+  .value-content h4 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .value-content p { font-size: 13px; color: var(--warm-grey); line-height: 1.6; }
+
+  /* EXPERIENCE */
+  .experience {
+    background: var(--dark);
+    padding: 120px 60px;
+    color: var(--cream);
+  }
+  .experience .section-label { color: rgba(245,240,232,0.4); }
+  .experience .section-title { color: var(--cream); }
+
+  .exp-grid {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .exp-card {
+    background: rgba(255,255,255,0.04);
+    padding: 40px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--rust);
+    transition: height 0.4s ease;
+  }
+  .exp-card:hover::before { height: 100%; }
+  .exp-card:hover { background: rgba(255,255,255,0.07); }
+
+  .exp-company {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 12px;
+  }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .exp-period {
+    font-size: 12px;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 20px;
+  }
+  .exp-bullets {
+    list-style: none;
+  }
+  .exp-bullets li {
+    font-size: 13px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+    padding: 5px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+    font-size: 11px;
+    top: 6px;
+  }
+
+  /* SKILLS */
+  .skills {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  .skill-tag {
+    padding: 10px 20px;
+    border: 1px solid rgba(74,63,53,0.25);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-tag::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--rust);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+  .skill-tag:hover { color: var(--cream); border-color: var(--rust); }
+  .skill-tag:hover::before { transform: scaleX(1); }
+
+  /* ACHIEVEMENTS */
+  .achievements {
+    background: var(--light-rust);
+    padding: 100px 60px;
+  }
+  .ach-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .ach-card {
+    background: var(--cream);
+    padding: 36px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .ach-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(192,74,42,0.15); }
+  .ach-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .ach-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .ach-desc { font-size: 13px; color: var(--warm-grey); line-height: 1.6; }
+
+  /* EDUCATION */
+  .education {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .edu-item {
+    border-left: 2px solid rgba(74,63,53,0.2);
+    padding-left: 28px;
+    margin-top: 40px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .edu-item::before {
+    content: '';
+    position: absolute;
+    left: -5px; top: 6px;
+    width: 8px; height: 8px;
+    background: var(--rust);
+    border-radius: 50%;
+  }
+  .edu-item:hover { border-color: var(--rust); }
+  .edu-year { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rust); margin-bottom: 8px; }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .edu-inst { font-size: 14px; color: var(--mid); margin-bottom: 4px; }
+  .edu-score { font-size: 12px; color: var(--warm-grey); }
+
+  .cert-list { margin-top: 40px; }
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(74,63,53,0.12);
+  }
+  .cert-bullet { width: 6px; height: 6px; background: var(--rust); border-radius: 50%; flex-shrink: 0; }
+  .cert-name { font-size: 14px; color: var(--mid); }
+  .cert-org { font-size: 12px; color: var(--warm-grey); margin-top: 2px; }
+
+  /* CONTACT */
+  .contact {
+    background: var(--dark);
+    padding: 120px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-bg-text {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+  }
+  .contact .section-label { color: rgba(245,240,232,0.4); }
+  .contact .section-title { color: var(--cream); margin-top: 12px; }
+  .contact-email {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-style: italic;
+    color: var(--accent);
+    text-decoration: none;
+    display: block;
+    margin: 40px auto 0;
+    transition: color 0.3s;
+  }
+  .contact-email:hover { color: var(--rust); }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .contact-link {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-link:hover { color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(10, 8, 6, 0.92);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .modal-overlay.open {
+    display: flex;
+    opacity: 0;
+    animation: modalFadeIn 0.35s ease forwards;
+  }
+  @keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-box {
+    background: var(--dark);
+    border: 1px solid rgba(192,74,42,0.25);
+    max-width: 860px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    cursor: default;
+    transform: translateY(30px) scale(0.97);
+    animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+  }
+  @keyframes modalSlideUp {
+    from { transform: translateY(30px) scale(0.97); }
+    to { transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: rgba(245,240,232,0.7);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    line-height: 1;
+    transition: color 0.2s, background 0.2s;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .modal-close:hover { color: var(--rust); background: rgba(255,255,255,0.12); }
+
+  .modal-media {
+    width: 100%;
+    background: #111;
+    max-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .modal-media img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    display: block;
+  }
+  .modal-media video {
+    width: 100%;
+    max-height: 480px;
+    display: block;
+    background: #000;
+  }
+
+  /* Placeholder shown when no file is set */
+  .modal-placeholder {
+    width: 100%;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: rgba(245,240,232,0.3);
+    border: 2px dashed rgba(192,74,42,0.3);
+    margin: 0;
+  }
+  .modal-placeholder-icon { font-size: 48px; opacity: 0.4; }
+  .modal-placeholder p { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; line-height: 1.6; }
+  .modal-placeholder code { background: rgba(192,74,42,0.15); padding: 3px 8px; font-size: 11px; border-radius: 3px; color: var(--rust); font-family: monospace; }
+
+  .modal-body {
+    padding: 36px 40px 40px;
+  }
+  .modal-tag {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 12px;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .modal-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.65);
+  }
+  .modal-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,240,232,0.08);
+  }
+  .modal-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .modal-stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.35);
+    margin-top: 4px;
+  }
+
+  .ach-card[data-modal] {
+    cursor: pointer;
+    position: relative;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ach-card[data-modal] { cursor: none; }
+  }
+  .ach-card.has-preview::after {
+    content: '↗ Click to view';
+    position: absolute;
+    bottom: 16px; right: 20px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  @media (max-width: 600px) {
+    .modal-overlay { padding: 12px; align-items: flex-end; }
+    .modal-box { max-height: 95vh; border-radius: 12px 12px 0 0; }
+    .modal-media { max-height: 260px; }
+    .modal-media video { max-height: 260px; }
+    .modal-media img { max-height: 260px; }
+    .modal-body { padding: 24px 20px 28px; }
+    .modal-title { font-size: 22px; }
+    .modal-stats { gap: 20px; flex-wrap: wrap; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 28px 60px; }
+    .hero-right { height: 300px; }
+    .hero-stats { left: 28px; bottom: 40px; gap: 32px; }
+    .about, .skills, .education { grid-template-columns: 1fr; gap: 40px; padding: 80px 28px; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .experience { padding: 80px 28px; }
+    .ach-grid { grid-template-columns: 1fr; }
+    .achievements { padding: 80px 28px; }
+    .contact { padding: 80px 28px; }
+    footer { flex-direction: column; gap: 8px; padding: 20px 28px; text-align: center; }
+    .hero-monogram { font-size: 120px; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; margin-top: 36px; padding-top: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SS</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">MBA · Marketing · Strategy</p>
+    <h1 class="hero-name">Shreyash<br><em>Shekhar</em></h1>
+    <p class="hero-desc">
+      Marketing strategist and creative thinker with hands-on experience across operations, CSR, and brand storytelling. Currently pursuing MBA at NMIMS Hyderabad, specializing in Marketing with a minor in Analytics.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50%</div>
+        <div class="stat-label">Lead Conversion</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">25%</div>
+        <div class="stat-label">Error Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6K+</div>
+        <div class="stat-label">Avg. Content Views</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-graphic"></div>
+    <div class="hero-circles">
+      <div class="circle-ring"></div>
+      <div class="circle-ring"></div>
+      <div class="circle-ring"></div>
+      <div class="hero-monogram">S</div>
+    </div>
+    <!-- ↓ YOUR PHOTO: replace "your-photo.jpg" with your actual filename -->
+    <!-- Put the image file in the same folder as this HTML file -->
+    <div class="hero-photo-wrap" id="heroPhotoWrap">
+      <!-- Once you have your photo ready, replace the placeholder below with: -->
+      <!-- <img src="your-photo.jpg" alt="Shreyash Shekhar"> -->
+      <div class="hero-photo-placeholder">
+        <span>🧑‍💼</span>
+        <p>Add your photo here<br><small style="font-size:10px;opacity:0.6;">Replace placeholder with your image</small></p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-text">Marketing Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Brand Storytelling <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Operations Management <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Content Creation <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Data Analytics <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">CSR & Social Impact <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Digital Marketing <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Marketing Strategy <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Brand Storytelling <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Operations Management <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Content Creation <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Data Analytics <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">CSR & Social Impact <span class="ticker-dot">✦</span></span>
+    <span class="ticker-text">Digital Marketing <span class="ticker-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text reveal">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">Where <em>creativity</em> meets strategy</h2>
+    <p>Hi, I am Shreyash, an MBA student who believes great marketing is problem-solving with a creative twist. From managing cement factory operations to producing CSR documentaries, I bring a rare blend of business acumen and storytelling ability.</p>
+    <p>I have launched marketing campaigns and developed performance marketing experience through Meta Ads, built learning resources for Tata Power, and amplified social impact for PVR Nest. Currently at NMIMS Hyderabad, I am building on this foundation with a specialization in Marketing and a minor in Analytics.</p>
+  </div>
+  <div class="about-right reveal">
+    <div class="value-row">
+      <span class="value-num">01</span>
+      <div class="value-content">
+        <h4>Strategic Thinker</h4>
+        <p>Built a business roadmap for Tata Power's learning platform from the ground up, aligning with senior management's strategic goals.</p>
+      </div>
+    </div>
+    <div class="value-row">
+      <span class="value-num">02</span>
+      <div class="value-content">
+        <h4>Creative Executor</h4>
+        <p>Produced a documentary, designed brand materials, and ran Meta Ads campaigns, all with measurable impact.</p>
+      </div>
+    </div>
+    <div class="value-row">
+      <span class="value-num">03</span>
+      <div class="value-content">
+        <h4>Operations-Grounded</h4>
+        <p>As a managing partner at Gladstone Cement, I drove a 15% cost reduction and managed 25+ person teams hands-on.</p>
+      </div>
+    </div>
+    <div class="value-row">
+      <span class="value-num">04</span>
+      <div class="value-content">
+        <h4>Data-Informed</h4>
+        <p>Conducted consumer behavior research for HDFC KlarifyLife with 20 structured interviews and actionable insights.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="reveal">
+    <p class="section-label">Career Journey</p>
+    <h2 class="section-title">Experience &amp; <em>Impact</em></h2>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <p class="exp-company">Tata Power-DDL</p>
+      <h3 class="exp-role">Marketing Intern</h3>
+      <p class="exp-period">April 2025 – June 2025 · Delhi</p>
+      <ul class="exp-bullets">
+        <li>Designed and set up a cost-effective in-house studio for e-learning content production.</li>
+        <li>Created a business roadmap and marketing strategies to generate qualified leads.</li>
+        <li>Compiled a course book on Financial Management & Energy Economics from internal materials.</li>
+        <li>Evaluated LMS integration options with FSR Global, advising senior management on platform selection.</li>
+        <li>Designed brochures, academic calendars, and course layouts ensuring consistent visual identity.</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <p class="exp-company">PVR Nest</p>
+      <h3 class="exp-role">CSR Intern</h3>
+      <p class="exp-period">January 2025 – February 2025 · Delhi</p>
+      <ul class="exp-bullets">
+        <li>Produced a short documentary showcasing journeys of 11 women cohort leaders.</li>
+        <li>Developed a product portfolio for handcrafted items made by women beneficiaries.</li>
+        <li>Designed engaging social media content to drive outreach and visibility.</li>
+        <li>Contributed to digital storytelling initiatives amplifying program impact.</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <p class="exp-company">Gladstone Cement Works</p>
+      <h3 class="exp-role">Designated Partner</h3>
+      <p class="exp-period">October 2022 – July 2023 · Bihar</p>
+      <ul class="exp-bullets">
+        <li>Managed factory operations and recruited, trained & supervised a team of 25 employees.</li>
+        <li>Managed 30+ leads with a 50% conversion rate through strategic client relationship management.</li>
+        <li>Achieved 15% reduction in raw material costs through supplier negotiations.</li>
+        <li>Implemented workforce management platform to enhance overall productivity.</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <p class="exp-company">VD Memorial Educational Trust</p>
+      <h3 class="exp-role">Assistant Office Manager</h3>
+      <p class="exp-period">February 2021 – July 2023 · Bihar</p>
+      <ul class="exp-bullets">
+        <li>Maintained records for 300+ students and 50 staff members with high accuracy.</li>
+        <li>Coordinated MIS installation, achieving a 25% reduction in administrative errors.</li>
+        <li>Successfully organized 100+ online classes during COVID-19 pivot to remote learning.</li>
+        <li>Planned and executed 10+ school events and meetings annually.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="reveal">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Skills &amp; <em>Tools</em></h2>
+  </div>
+  <div class="reveal">
+    <p style="font-size:14px; color:var(--mid); line-height:1.7; margin-bottom:32px;">
+      A toolkit built across real-world roles — from design software to data platforms, from social media management to consumer research. Ready to deploy from day one.
+    </p>
+    <div class="skills-tags">
+      <span class="skill-tag">Canva</span>
+      <span class="skill-tag">Meta Ads</span>
+      <span class="skill-tag">Tableau</span>
+      <span class="skill-tag">Power BI</span>
+      <span class="skill-tag">Video Editing</span>
+      <span class="skill-tag">Adobe Premiere Pro</span>
+      <span class="skill-tag">Content Strategy</span>
+      <span class="skill-tag">Digital Marketing</span>
+      <span class="skill-tag">Brand Design</span>
+      <span class="skill-tag">Operations Management</span>
+      <span class="skill-tag">Photography</span>
+      <span class="skill-tag">Social Media</span>
+      <span class="skill-tag">Market Research</span>
+      <span class="skill-tag">Lean Six Sigma</span>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="achievements">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+    <p class="section-label">Highlights</p>
+    <h2 class="section-title">Wins &amp; <em>Milestones</em></h2>
+  </div>
+  <div class="ach-grid">
+    <div class="ach-card reveal has-preview" data-modal="meta-ads">
+      <span class="ach-icon">📊</span>
+      <h3 class="ach-title">Meta Ads Campaign</h3>
+      <p class="ach-desc">Planned and executed a 2-day Instagram campaign achieving 3,030 reach, 3,694 impressions, and 46 conversations at just ₹7.44 per conversation.</p>
+    </div>
+    <div class="ach-card reveal has-preview" data-modal="csr-documentary">
+      <span class="ach-icon">🎬</span>
+      <h3 class="ach-title">CSR Documentary</h3>
+      <p class="ach-desc">Produced and directed a short film showcasing the stories of 11 women cohort leaders for PVR Nest's social impact program.</p>
+    </div>
+    <div class="ach-card reveal has-preview" data-modal="product-portfolio">
+      <span class="ach-icon">🛍️</span>
+      <h3 class="ach-title">Product Portfolio</h3>
+      <p class="ach-desc">Developed a product catalogue featuring handcrafted items made by women beneficiaries at PVR Nest, paired with social media creatives to drive outreach.</p>
+    </div>
+    <div class="ach-card reveal" data-modal="social-media">
+      <span class="ach-icon">📈</span>
+      <h3 class="ach-title">Social Media Growth</h3>
+      <p class="ach-desc">Created high-performing content for Oprencia Club consistently achieving 4K–6K+ views per post as Social & Content SPOC.</p>
+    </div>
+    <div class="ach-card reveal" data-modal="consumer-research">
+      <span class="ach-icon">🔬</span>
+      <h3 class="ach-title">Consumer Research</h3>
+      <p class="ach-desc">Led a consumer behavior research project for HDFC KlarifyLife, conducting 20 structured interviews and delivering actionable findings.</p>
+    </div>
+    <div class="ach-card reveal" data-modal="tata-power">
+      <span class="ach-icon">💼</span>
+      <h3 class="ach-title">Tata Power Strategy</h3>
+      <p class="ach-desc">Developed a complete business roadmap for Tata Power DDL's learning platform, from studio setup to LMS integration strategy.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="reveal">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education &amp; <em>Learning</em></h2>
+
+    <div class="edu-item">
+      <p class="edu-year">2024 – 2026</p>
+      <h3 class="edu-degree">MBA — Marketing & Analytics</h3>
+      <p class="edu-inst">SVKM's Narsee Monjee Institute of Management Studies (NMIMS), Hyderabad</p>
+      <p class="edu-score">CGPA: 7.72 / 10</p>
+    </div>
+    <div class="edu-item">
+      <p class="edu-year">2017 – 2020</p>
+      <h3 class="edu-degree">B.Com (Hons.)</h3>
+      <p class="edu-inst">Banaras Hindu University, Varanasi</p>
+      <p class="edu-score">63.10%</p>
+    </div>
+    <div class="edu-item">
+      <p class="edu-year">2017</p>
+      <h3 class="edu-degree">XII — CBSE</h3>
+      <p class="edu-inst">The Aryan International School, Varanasi</p>
+      <p class="edu-score">84.16%</p>
+    </div>
+    <div class="edu-item">
+      <p class="edu-year">2015</p>
+      <h3 class="edu-degree">X — CBSE</h3>
+      <p class="edu-inst">Nalanda Academy, Kota, Rajasthan</p>
+      <p class="edu-score">93.10%</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <p class="section-label">Certifications</p>
+    <h2 class="section-title" style="font-size:28px;">Credentials</h2>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-bullet"></div>
+        <div>
+          <p class="cert-name">Foundations of Digital Marketing & E-commerce</p>
+          <p class="cert-org">Google · Coursera</p>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-bullet"></div>
+        <div>
+          <p class="cert-name">Lean Six Sigma — Green Belt Training</p>
+          <p class="cert-org">KPMG</p>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-bullet"></div>
+        <div>
+          <p class="cert-name">Digital Skills: User Experience</p>
+          <p class="cert-org">Accenture</p>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-bullet"></div>
+        <div>
+          <p class="cert-name">Introduction to Figma</p>
+          <p class="cert-org">Figma Academy</p>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-bullet"></div>
+        <div>
+          <p class="cert-name">Canva Essentials</p>
+          <p class="cert-org">Canva</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-bg-text">CONNECT</div>
+  <div class="reveal" style="position:relative; z-index:2;">
+    <p class="section-label">Let's Talk</p>
+    <h2 class="section-title">Ready to work<br><em>together?</em></h2>
+    <a href="mailto:shreyashshekhar22@gmail.com" class="contact-email">
+      shreyashshekhar22@gmail.com
+    </a>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/shreyashshekhar22" target="_blank" class="contact-link">LinkedIn</a>
+      <span style="color:rgba(245,240,232,0.2); font-size:12px;">·</span>
+      <a href="mailto:shreyashshekhar22@gmail.com" class="contact-link">Email</a>
+      <span style="color:rgba(245,240,232,0.2); font-size:12px;">·</span>
+      <a href="tel:+917985018577" class="contact-link">+91 79850 18577</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MODAL SYSTEM
+     HOW TO ADD YOUR FILES:
+     - Find the modal you want (e.g. id="modal-csr-documentary")
+     - For VIDEO: set src="your-video-filename.mp4" on the <video> tag
+     - For IMAGE: set src="your-image-filename.jpg" on the <img> tag
+     - Put your media files in the same folder as this HTML file
+     ============================================================ -->
+
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    <div class="modal-media" id="modal-media"></div>
+    <div class="modal-body">
+      <p class="modal-tag" id="modal-tag"></p>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-stats" id="modal-stats"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL DATA — Edit this section to customize each popup
+     ============================================================ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const MODALS = {
+
+  "meta-ads": {
+    tag: "Performance Marketing",
+    title: "Meta Ads Instagram Campaign",
+    desc: "Planned and executed a 2-day Meta Ads campaign on Instagram targeting a niche audience. Crafted the ad creative, defined audience segments, managed the budget, and analyzed post-campaign performance. This hands-on project deepened my understanding of paid social, cost-per-result optimization, and conversion funnels.",
+    stats: [
+      { num: "3,030", label: "Total Reach" },
+      { num: "3,694", label: "Impressions" },
+      { num: "46", label: "Conversations" },
+      { num: "₹7.44", label: "Cost / Conversation" }
+    ],
+    // ↓ TYPE: "image" or "video"
+    mediaType: "image",
+    // ↓ FILE: put your screenshot/image in the same folder as this HTML file and change the filename
+    mediaSrc: "",  // e.g. "meta-ads-results.jpg"
+    mediaAlt: "Meta Ads Campaign Results Screenshot"
+  },
+
+  "product-portfolio": {
+    tag: "CSR · PVR Nest",
+    title: "Handcrafted Product Portfolio",
+    desc: "Designed and developed a product catalogue showcasing handcrafted items made by women beneficiaries of PVR Nest's social impact program. The portfolio was paired with targeted social media creatives to promote the products and increase outreach for the initiative.",
+    stats: [
+      { num: "1", label: "Catalogue Designed" }
+    ],
+    mediaType: "image",
+    mediaSrc: "",  // e.g. "pvr-nest-portfolio.jpg"
+    mediaAlt: "PVR Nest Product Portfolio"
+  },
+
+  "csr-documentary": {
+    tag: "CSR · PVR Nest",
+    title: "Documentary: Women Cohort Leaders",
+    desc: "Produced and directed a short documentary film for PVR Nest's social impact program, featuring the journeys of 11 cohort leaders — women entrepreneurs who have transformed their communities. The project involved scripting, filming, interviewing subjects, and editing the final cut.",
+    stats: [
+      { num: "11", label: "Stories Told" },
+      { num: "1", label: "Documentary Film" }
+    ],
+    // ↓ TYPE: "video" — put your .mp4 file in the same folder as this HTML file
+    mediaType: "video",
+    mediaSrc: "",  // e.g. "pvr-nest-documentary.mp4"
+    mediaAlt: "PVR Nest CSR Documentary"
+  },
+
+  "social-media": {
+    tag: "Content Strategy · NMIMS",
+    title: "Oprencia Club Social Media",
+    desc: "As the Social & Content SPOC for Oprencia (Operations Club), I managed end-to-end content planning, creation, and publishing. Designed reels, posts, and event updates using Canva, VN, and Adobe Premiere Pro — consistently achieving 4K–6K+ views per post and building the club's digital presence.",
+    stats: [
+      { num: "4K–6K+", label: "Avg Views / Post" }
+    ],
+    // ↓ Add a screenshot or collage of your best-performing posts
+    mediaType: "image",
+    mediaSrc: "",  // e.g. "oprencia-posts.jpg"
+    mediaAlt: "Oprencia Club Social Media Posts"
+  },
+
+  "consumer-research": {
+    tag: "Live Project · HDFC KlarifyLife",
+    title: "Consumer Behavior Research",
+    desc: "Conducted a structured consumer behavior research project for HDFC KlarifyLife. Designed an interview framework, conducted 20 one-on-one interviews, transcribed and coded responses, and identified key behavioral trends. Delivered a structured report with actionable insights for the client.",
+    stats: [
+      { num: "20", label: "Interviews Conducted" }
+    ],
+    // ↓ Add a screenshot of your report cover or key findings slide
+    mediaType: "image",
+    mediaSrc: "",  // e.g. "klarifylife-report.jpg"
+    mediaAlt: "KlarifyLife Research Report"
+  },
+
+  "tata-power": {
+    tag: "Marketing Internship · Tata Power-DDL",
+    title: "Tata Power Learning Platform Strategy",
+    desc: "Developed a comprehensive business strategy for Tata Power DDL's internal e-learning initiative. This included studio setup planning, course book design, LMS vendor evaluation (in collaboration with FSR Global), and creation of branded learning materials — brochures, academic calendars, and course layouts.",
+    stats: [
+      { num: "1", label: "Course Book Compiled" },
+      { num: "3", label: "LMS Options Evaluated" }
+    ],
+    // ↓ Add brochure design, course book cover, or studio setup photo
+    mediaType: "image",
+    mediaSrc: "",  // e.g. "tata-power-brochure.jpg"
+    mediaAlt: "Tata Power Learning Materials"
+  },
+
+  "cost-reduction": {
+    tag: "Operations · Gladstone Cement Works",
+    title: "15% Raw Material Cost Reduction",
+    desc: "As Designated Partner at Gladstone Cement Works, identified inefficiencies in the procurement process and renegotiated terms with key suppliers. Also implemented a workforce management platform and streamlined production workflows, resulting in improved efficiency and a 15% reduction in raw material costs.",
+    stats: [
+      { num: "15%", label: "Cost Reduction" },
+      { num: "50%", label: "Lead Conversion Rate" },
+      { num: "25", label: "Team Members Managed" }
+    ],
+    // ↓ Add a photo from the factory or a chart showing results
+    mediaType: "image",
+    mediaSrc: "",  // e.g. "cement-works.jpg"
+    mediaAlt: "Gladstone Cement Works Operations"
+  }
+
+};
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Shreyash Shekhar. MBA Candidate, NMIMS Hyderabad.</p>
+  <p style="text-align:right;">Marketing · Strategy · Creativity</p>
+</footer>
+
+<script>
+  // Custom cursor — desktop only
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
+
+  if (!isTouch) {
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animateFollower() {
+      followerX += (mouseX - followerX) * 0.12;
+      followerY += (mouseY - followerY) * 0.12;
+      follower.style.left = followerX + 'px';
+      follower.style.top = followerY + 'px';
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+
+    document.querySelectorAll('a, button, .skill-tag, .exp-card, .ach-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        follower.style.opacity = '0.2';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        follower.style.opacity = '0.5';
+      });
+    });
+  }
+
+  // ── MODAL SYSTEM ──────────────────────────────────────────
+  const overlay = document.getElementById('modal-overlay');
+  const modalClose = document.getElementById('modal-close');
+
+  function buildPlaceholder(type) {
+    const icon = type === 'video' ? '🎬' : '🖼️';
+    const hint = type === 'video'
+      ? 'Put your <code>.mp4</code> file next to the HTML and set <code>mediaSrc</code>'
+      : 'Put your <code>.jpg / .png</code> next to the HTML and set <code>mediaSrc</code>';
+    return `<div class="modal-placeholder">
+      <span class="modal-placeholder-icon">${icon}</span>
+      <p>Your ${type} will appear here<br>${hint}</p>
+    </div>`;
+  }
+
+  function openModal(id) {
+    const data = MODALS[id];
+    if (!data) return;
+
+    // Media
+    const mediaEl = document.getElementById('modal-media');
+    if (data.mediaSrc) {
+      if (data.mediaType === 'video') {
+        mediaEl.innerHTML = `<video controls autoplay muted playsinline>
+          <source src="${data.mediaSrc}" type="video/mp4">
+          Your browser does not support video playback.
+        </video>`;
+      } else {
+        mediaEl.innerHTML = `<img src="${data.mediaSrc}" alt="${data.mediaAlt || ''}">`;
+      }
+    } else {
+      mediaEl.innerHTML = buildPlaceholder(data.mediaType || 'image');
+    }
+
+    // Text
+    document.getElementById('modal-tag').textContent = data.tag || '';
+    document.getElementById('modal-title').textContent = data.title || '';
+    document.getElementById('modal-desc').textContent = data.desc || '';
+
+    // Stats
+    const statsEl = document.getElementById('modal-stats');
+    if (data.stats && data.stats.length) {
+      statsEl.innerHTML = data.stats.map(s => `
+        <div>
+          <div class="modal-stat-num">${s.num}</div>
+          <div class="modal-stat-label">${s.label}</div>
+        </div>`).join('');
+      statsEl.style.display = 'flex';
+    } else {
+      statsEl.style.display = 'none';
+    }
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Hide custom cursor over modal
+    cursor.style.opacity = '0';
+    follower.style.opacity = '0';
+  }
+
+  function closeModal() {
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.classList.remove('open');
+      overlay.style.opacity = '';
+      document.body.style.overflow = '';
+      // Restore custom cursor
+      cursor.style.opacity = '1';
+      follower.style.opacity = '0.5';
+      // Pause any video
+      const vid = overlay.querySelector('video');
+      if (vid) vid.pause();
+    }, 300);
+  }
+
+  // Attach click to all cards with data-modal
+  document.querySelectorAll('[data-modal]').forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.modal));
+  });
+
+  // Close triggers
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
